@@ -26,3 +26,8 @@ hs_err_pid*
 # gradle
 .gradle
 build
+
+# intellij
+gradebook.iml
+grbk.ipr
+grbk.iws
