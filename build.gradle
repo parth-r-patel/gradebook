@@ -1,0 +1,10 @@
+group 'letaparth'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.mongodb:mongodb-driver-async:3.4.0-beta1'
+}
