@@ -1,10 +1,9 @@
 package app;
 
-import com.mongodb.async.client.MongoClient;
-import com.mongodb.async.client.MongoClients;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -17,7 +16,9 @@ public class Grbk extends Application {
         window.setTitle("GRBK");
 
         Parent root = FXMLLoader.load(getClass().getResource("/app.fxml"));
-        MongoClient mongo = MongoClients.create();
+        Scene s_main = new Scene(root, 800, 800);
+        window.setScene(s_main);
+
         window.show();
     }
 
