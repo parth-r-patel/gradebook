@@ -10,16 +10,19 @@ import javafx.stage.Stage;
  * Created by Parth on 2017-06-18.
  */
 public class Grbk extends Application {
+    public static Stage primaryStage;
 
     @Override
     public void start(Stage window) throws Exception {
-        window.setTitle("GRBK");
+        primaryStage = window;
+        primaryStage.setTitle("GRBK");
 
         Parent root = FXMLLoader.load(getClass().getResource("/app.fxml"));
-        Scene s_main = new Scene(root, 800, 800);
-        window.setScene(s_main);
 
-        window.show();
+        Scene s_main = new Scene(root, 800, 800);
+        primaryStage.setScene(s_main);
+
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
