@@ -14,12 +14,19 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriter;
+import java.awt.Robot;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 /**
  * Created by Parth on 2017-11-06.
@@ -33,6 +40,7 @@ public class FrostedRegion extends Region {
     private final double blurAmount = 15;
     private final int blurIterations = 100;
     private Image image;
+    private ImageView bgImage;
 
     public FrostedRegion(Stage stage, Node app) {
         this.container = stage;
@@ -42,12 +50,19 @@ public class FrostedRegion extends Region {
         blurEffect.setInput(new ColorAdjust(0.0, 0.0, 0.5, 0.0));
 
         Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+        File file = new File("chart.png");
         try {
-            java.awt.Robot robot = new java.awt.Robot();
-            java.awt.image.BufferedImage image = robot.createScreenCapture(new java.awt.Rectangle((int)screen.getMinX(), (int)screen.getMinY(), (int)screen.getWidth(), (int)screen.getHeight()));
+            Robot robot = new java.awt.Robot();
+            BufferedImage image = robot.createScreenCapture(new java.awt.Rectangle((int)screen.getMinX(), (int)screen.getMinY(), (int)screen.getWidth(), (int)screen.getHeight()));
 
             this.image = SwingFXUtils.toFXImage(image, null);
-        } catch (java.awt.AWTException e) {
+            ImageIO.write(SwingFXUtils.fromFXImage(this.image, null), "png", file);
+            this.bgImage = new ImageView(this.image);
+            Rectangle2D vp = new Rectangle2D(this.container.getX(), this.container.getY(), this.container.getWidth(), this.container.getHeight());
+            System.out.println(vp);
+            this.bgImage.setViewport(vp);
+            ((StackPane) app).getChildren().add(bgImage);
+        } catch (Exception e) {
             System.out.println("The robot of doom strikes!");
             e.printStackTrace();
         }
@@ -74,8 +89,8 @@ public class FrostedRegion extends Region {
         this.height = (int) this.container.getHeight();
 
         //TODO: change to image view and move viewport as dragged
-        BackgroundImage bgImage = new BackgroundImage(this.image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        this.setBackground(new Background(bgImage));
+//        ImageView bgImage = new ImageView(image);
+//        bgImage.setViewport();
     }
 
     public void makeDragabble() {
@@ -102,7 +117,7 @@ public class FrostedRegion extends Region {
         this.appContainer.setOnMouseDragged(mouseEvent -> {
             this.container.setX(mouseEvent.getScreenX() + dragDelta.x);
             this.container.setY(mouseEvent.getScreenY() + dragDelta.y);
-
+            this.bgImage.setViewport(new Rectangle2D(mouseEvent.getScreenX() + dragDelta.x, mouseEvent.getScreenY() + dragDelta.y, this.container.getWidth(), this.container.getHeight()));
             inDrag.set(true);
 //            this.container.hide();
         });

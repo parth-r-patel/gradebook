@@ -51,6 +51,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/gradebook.iml" filepath="$PROJECT_DIR$/gradebook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gradebook.iml" filepath="$PROJECT_DIR$/gradebook.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">

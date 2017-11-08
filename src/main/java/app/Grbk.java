@@ -28,8 +28,8 @@ public class Grbk extends Application {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setTitle("GRBK");
 
-        Storage.connectMongoClient();
-        Storage.getStudents();
+//        Storage.connectMongoClient();
+//        Storage.getStudents();
 
         StackPane root = new StackPane();
         root.setStyle("-fx-background-color: white");
@@ -39,7 +39,7 @@ public class Grbk extends Application {
 
         Pane appFxml = FXMLLoader.load(getClass().getResource("/app.fxml"));
 
-        FrostedRegion frost = new FrostedRegion(primaryStage, appFxml.getChildren().get(0));
+        FrostedRegion frost = new FrostedRegion(primaryStage, root);
         frost.setPrefSize(800, 800);
         root.getChildren().addAll(frost, appFxml);
 
