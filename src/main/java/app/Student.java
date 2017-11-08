@@ -13,10 +13,11 @@ public class Student {
     private SimpleStringProperty nameProp = new SimpleStringProperty("");
     private ArrayList<SimpleLongProperty> testScoresProp = new ArrayList<>();
     private SimpleLongProperty projScoreProp = new SimpleLongProperty(-1);
-    private static int testSize = 0;
+    static int testSize = 0;
 
-    public Student() {
-
+    //TODO: make fxml start with 1 test by default and all new students should populate one test score prop
+    public Student(String name) {
+        this.nameProp.set(name);
     }
 
     public void setNameProp(String name) {
@@ -27,9 +28,9 @@ public class Student {
         return this.nameProp.get();
     }
 
-//    public ArrayList<SimpleLongProperty> getAllTestScores() {
-//        return testScoresProp;
-//    }
+    public ArrayList<SimpleLongProperty> getAllTestScores() {
+        return testScoresProp;
+    }
 
     public void setTestScoresProp(int index, long value) {
         this.testScoresProp.get(index).set(value);
@@ -46,14 +47,6 @@ public class Student {
     public Long getProjScoreprop() {
         return this.projScoreProp.get();
     }
-
-    public static int getTestSize() {
-        return testSize;
-    }
-
-//    public static SimpleIntegerProperty getTestSizeProp() {
-//        return new SimpleIntegerProperty(testSize);
-//    }
 
     public static void addTest() {
         for (Student student : AppCtrl.tableRecords)

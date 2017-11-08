@@ -95,31 +95,31 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.1/2ccf1154d1a8936042a8a742dc3e611d02ac7213/hamcrest-core-1.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.mongodb:bson:3.4.0-beta1">
+    <library name="Gradle: org.mongodb:bson:3.5.0">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/bson/3.4.0-beta1/323e76fa96d14f29fa0e8cf8e1b0fae663d34ba0/bson-3.4.0-beta1.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/bson/3.5.0/b639bed341c069622c39f14c5ad5bd42b4655337/bson-3.5.0.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/bson/3.4.0-beta1/e722ccb7380265564c6ce245aace9726c0b489bf/bson-3.4.0-beta1-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/bson/3.5.0/2459908ab34fbdab799fbb5a3016dc268174349/bson-3.5.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.mongodb:mongodb-driver-async:3.4.0-beta1">
+    <library name="Gradle: org.mongodb:mongodb-driver-async:3.5.0">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver-async/3.4.0-beta1/8f67c48073da316c7ebe2f6f6e8bd6930c06ae5b/mongodb-driver-async-3.4.0-beta1.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver-async/3.5.0/a5aa49e9aceded0e0c05d406e0a5e1ce924a70fc/mongodb-driver-async-3.5.0.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver-async/3.4.0-beta1/2293e721feb5a923f5eca7623b991c661601e495/mongodb-driver-async-3.4.0-beta1-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver-async/3.5.0/ae5deab82c8ce5f5d59b31d410c9c11bb040605a/mongodb-driver-async-3.5.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: org.mongodb:mongodb-driver-core:3.4.0-beta1">
+    <library name="Gradle: org.mongodb:mongodb-driver-core:3.5.0">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver-core/3.4.0-beta1/fb24105da6f0d5685d9de3e8482c287faf384ce8/mongodb-driver-core-3.4.0-beta1.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver-core/3.5.0/968cbc3dffd79cae1136f751079ad39315d09d99/mongodb-driver-core-3.5.0.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver-core/3.4.0-beta1/3faad5eba720c7e9fe2731fabe307817e0a4b6e8/mongodb-driver-core-3.4.0-beta1-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver-core/3.5.0/6acd3337f50374c405245ff1c0c21967e6593ccb/mongodb-driver-core-3.5.0-sources.jar!/" />
       </SOURCES>
     </library>
   </component>

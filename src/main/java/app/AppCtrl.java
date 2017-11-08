@@ -1,6 +1,8 @@
 package app;
 
+import custom_elements.ScoreFieldTableCell;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,11 +21,13 @@ public class AppCtrl {
     @FXML private TableView<Student> recordsTable;
     @FXML private TableColumn<Student, String> nameCol;
     @FXML private TableColumn<Student, Long> projectCol = new TableColumn<>();
-    @FXML private TableColumn tests = new TableColumn();
+    @FXML private TableColumn testsCol = new TableColumn();
     @FXML private ArrayList<TableColumn<Student, Long>> testCols = new ArrayList<>();
     @FXML private Button add;
+    @FXML private Button addStudent;
     @FXML private AnchorPane ap1;
-    public static ObservableList<Student> tableRecords = FXCollections.observableArrayList();
+    @FXML private TabPane tabs;
+    static ObservableList<Student> tableRecords;
 
     public AppCtrl() {
     }
@@ -31,54 +35,72 @@ public class AppCtrl {
     // TODO: use bindings for calculating averages
     @FXML
     public void initialize() {
-        Student r1 = new Student();
-        tableRecords.add(r1);
-//        Student.addTest();
-//        Student.addTest();
+//        AnchorPane.setRightAnchor(recordsTable, 0.5);
+//        AnchorPane.setLeftAnchor(recordsTable, 0.5);
+
+//        initializeTableRecords();
+
+//        setupNameColumn();
+//        setupTestColumns();
+//        setupProjectColumn();
+//        setupButtonHandlers();
 //
-//        tableRecords.get(0).setName("letap Parth");
-//        tableRecords.get(0).getAllTestScores().set(0, new SimpleLongProperty(9));
-//        tableRecords.get(1).setName("letap");
-//        tableRecords.get(1).getAllTestScores().set(0, new SimpleLongProperty(78));
-//        tableRecords.get(1).getAllTestScores().set(1, new SimpleLongProperty(19));
+//        recordsTable.getColumns().addAll(testsCol, projectCol);
+//        recordsTable.setItems(tableRecords);
+    }
 
+    private void initializeTableRecords() {
+        tableRecords = FXCollections.observableArrayList(Storage.students);
 
+        // ADD a single sample student to table if course database is empty
+        // TODO: Dynamic nested column headers are now visable in JavaFX 9
+        if(tableRecords.size() == 0) {
+            Student s = new Student("Sample Student");
+            s.getAllTestScores().add(new SimpleLongProperty(-1));
+            Student.testSize++;
+            tableRecords.add(s);
+        }
+    }
+
+    private void setupButtonHandlers() {
+        add.setOnAction((event) -> {
+            Student.addTest();
+            createTestColumn(Student.testSize-1);
+            recordsTable.refresh();
+        });
+
+        addStudent.setOnAction((event) -> {
+            Student s = new Student("Sample Student");
+            for(int i = 0; i < Student.testSize; i++) {
+                s.getAllTestScores().add(new SimpleLongProperty(-1));
+            }
+            tableRecords.add(s);
+        });
+    }
+
+    private void setupNameColumn() {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("nameProp"));
         nameCol.setMinWidth(150);
-        nameCol.prefWidthProperty().bind(Grbk.primaryStage.widthProperty().subtract(projectCol.widthProperty()).subtract(tests.widthProperty()).subtract(20));
+        nameCol.setResizable(false);
+        nameCol.prefWidthProperty().bind(Grbk.primaryStage.widthProperty().subtract(projectCol.widthProperty()).subtract(testsCol.widthProperty()).subtract(20));
         nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
         nameCol.setOnEditCommit(
                 event -> tableRecords.get(event.getTablePosition().getRow()).setNameProp(event.getNewValue())
         );
-
-        tests.setText("Tests");
-        setupTestColumns();
-
-        setupProjectColumn();
-
-        recordsTable.getColumns().addAll(tests, projectCol);
-        recordsTable.setItems(tableRecords);
-
-        add.setOnAction(
-                event -> {
-                    Student.addTest();
-                    createTestColumn(Student.getTestSize()-1);
-                    recordsTable.refresh();
-                }
-        );
-
-        AnchorPane.setRightAnchor(recordsTable, 0.5);
-        AnchorPane.setLeftAnchor(recordsTable, 0.5);
     }
 
     private void setupTestColumns() {
-        for(int i = 0; i < Student.getTestSize(); i++) {
+        testsCol.setText("Tests");
+        testsCol.setResizable(false);
+
+        for(int i = 0; i < Student.testSize; i++) {
             createTestColumn(i);
         }
     }
 
     private void setupProjectColumn() {
         projectCol.setText("Final Project");
+        projectCol.setResizable(false);
         projectCol.setCellValueFactory(
                 column -> new ReadOnlyObjectWrapper<>(column.getValue().getProjScoreprop())
         );
@@ -95,6 +117,7 @@ public class AppCtrl {
     private void createTestColumn(int i) {
         TableColumn<Student, Long> test = new TableColumn<>();
         test.setPrefWidth(60);
+        test.setResizable(false);
 
         test.setText("Test - " + (i+1));
         test.setCellValueFactory(
@@ -110,6 +133,6 @@ public class AppCtrl {
         );
 
 //        testCols.add(test);
-        tests.getColumns().add(test);
+        testsCol.getColumns().add(test);
     }
 }

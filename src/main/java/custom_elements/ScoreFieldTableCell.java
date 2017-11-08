@@ -1,5 +1,6 @@
-package app;
+package custom_elements;
 
+import app.Student;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;

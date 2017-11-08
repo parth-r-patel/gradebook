@@ -10,6 +10,6 @@ repositories {
 }
 
 dependencies {
-    compile "org.mongodb:mongodb-driver-async:3.4.0-beta1"
+    compile "org.mongodb:mongodb-driver-async:3.5.0"
     compile "com.googlecode.json-simple:json-simple:1.1.1"
 }
