@@ -32,8 +32,11 @@ public class ScoreFieldTableCell extends TableCell<Student, Long> {
     @Override
     public void cancelEdit() {
         super.cancelEdit();
-
-        setText(valueOf());
+        if(!valueOf().equals("-1")) {
+            setText(valueOf());
+        }
+        // TODO: remove this line if canceled value should be default on next edit (change "cache")
+        textField.setText(valueOf());
         setGraphic(null);
     }
 
