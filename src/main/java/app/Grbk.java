@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.effect.BoxBlur;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -22,8 +23,6 @@ public class Grbk extends Application {
 
     @Override
     public void start(Stage window) throws Exception {
-        Platform.setImplicitExit(false);
-
         primaryStage = window;
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setTitle("GRBK");
@@ -32,15 +31,14 @@ public class Grbk extends Application {
 //        Storage.getStudents();
 
         StackPane root = new StackPane();
-        root.setStyle("-fx-background-color: white");
+        root.setStyle("-fx-background-color: transparent");
 
         Scene s_main = new Scene(root, 800, 800, Color.TRANSPARENT);
         s_main.getStylesheets().add(getClass().getResource("/app.css").toExternalForm());
 
         Pane appFxml = FXMLLoader.load(getClass().getResource("/app.fxml"));
-
         FrostedRegion frost = new FrostedRegion(primaryStage, root);
-        frost.setPrefSize(800, 800);
+        frost.setPrefSize(80, 80);
         root.getChildren().addAll(frost, appFxml);
 
         primaryStage.setScene(s_main);
@@ -51,7 +49,7 @@ public class Grbk extends Application {
 
     @Override
     public void stop() {
-        Storage.cleanup();
+//        Storage.cleanup();
     }
 
     public static void main(String[] args) {

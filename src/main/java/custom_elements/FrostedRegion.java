@@ -11,6 +11,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.TabPane;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
@@ -38,7 +39,7 @@ public class FrostedRegion extends Region {
     private final BoxBlur blurEffect;
     private int x, y, width, height;
     private final double blurAmount = 15;
-    private final int blurIterations = 100;
+    private final int blurIterations = 1000;
     private Image image;
     private ImageView bgImage;
 
@@ -47,8 +48,7 @@ public class FrostedRegion extends Region {
         this.appContainer = app;
         blurEffect = new BoxBlur(blurAmount, blurAmount, blurIterations);
         this.setEffect(blurEffect);
-        blurEffect.setInput(new ColorAdjust(0.0, 0.0, 0.5, 0.0));
-
+        blurEffect.setInput(new ColorAdjust(0.0, 0.0, 0.1, 0.0));
         Rectangle2D screen = Screen.getPrimary().getVisualBounds();
         File file = new File("chart.png");
         try {
@@ -58,68 +58,36 @@ public class FrostedRegion extends Region {
             this.image = SwingFXUtils.toFXImage(image, null);
             ImageIO.write(SwingFXUtils.fromFXImage(this.image, null), "png", file);
             this.bgImage = new ImageView(this.image);
-            Rectangle2D vp = new Rectangle2D(this.container.getX(), this.container.getY(), this.container.getWidth(), this.container.getHeight());
-            System.out.println(vp);
-            this.bgImage.setViewport(vp);
-            ((StackPane) app).getChildren().add(bgImage);
+            this.getChildren().add(bgImage);
         } catch (Exception e) {
             System.out.println("The robot of doom strikes!");
             e.printStackTrace();
         }
-
-        AnimationTimer timer = new AnimationTimer() {
-
-            @Override
-            public void handle(long time) {
-//                updateBackground();
-            }
-        };
-
-//        timer.start();
-    }
-
-    public void updateBackground() {
-        if (this.getWidth() < 1 || this.getHeight() < 1 || this.getOpacity() == 0 || this.x == this.container.getX() || this.y == this.container.getY()) {
-            return;
-        }
-
-        this.x = (int) this.container.getX();
-        this.y = (int) this.container.getY();
-        this.width = (int) this.container.getWidth();
-        this.height = (int) this.container.getHeight();
-
-        //TODO: change to image view and move viewport as dragged
-//        ImageView bgImage = new ImageView(image);
-//        bgImage.setViewport();
     }
 
     public void makeDragabble() {
-        final BooleanProperty inDrag = new SimpleBooleanProperty(false);
+//        final BooleanProperty inDrag = new SimpleBooleanProperty(false);
         final Delta dragDelta = new Delta();
 
-        this.appContainer.setOnMousePressed(mouseEvent -> {
+        Rectangle2D vp = new Rectangle2D(this.container.getX(), this.container.getY(), this.container.getWidth(), this.container.getHeight());
+        this.bgImage.setViewport(vp);
+
+        Node tp = ((Pane) ((StackPane)this.appContainer).getChildren().get(1)).getChildren().get(0);
+
+        tp.setOnMousePressed(mouseEvent -> {
             dragDelta.x = this.container.getX() - mouseEvent.getScreenX();
             dragDelta.y = this.container.getY() - mouseEvent.getScreenY();
             this.appContainer.setCursor(Cursor.MOVE);
         });
 
-        this.appContainer.setOnMouseReleased(mouseEvent -> {
+        tp.setOnMouseReleased(mouseEvent -> {
             this.appContainer.setCursor(Cursor.DEFAULT);
-
-            if (inDrag.get()) {
-//                this.container.hide();
-            }
-
-            inDrag.set(false);
-//            this.container.show();
         });
 
-        this.appContainer.setOnMouseDragged(mouseEvent -> {
+        tp.setOnMouseDragged(mouseEvent -> {
             this.container.setX(mouseEvent.getScreenX() + dragDelta.x);
             this.container.setY(mouseEvent.getScreenY() + dragDelta.y);
             this.bgImage.setViewport(new Rectangle2D(mouseEvent.getScreenX() + dragDelta.x, mouseEvent.getScreenY() + dragDelta.y, this.container.getWidth(), this.container.getHeight()));
-            inDrag.set(true);
-//            this.container.hide();
         });
     }
 
