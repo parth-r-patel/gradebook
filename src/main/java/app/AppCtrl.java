@@ -35,18 +35,19 @@ public class AppCtrl {
     // TODO: use bindings for calculating averages
     @FXML
     public void initialize() {
-//        AnchorPane.setRightAnchor(recordsTable, 0.5);
-//        AnchorPane.setLeftAnchor(recordsTable, 0.5);
+        AnchorPane.setRightAnchor(recordsTable, 0.5);
+        AnchorPane.setLeftAnchor(recordsTable, 0.5);
+        recordsTable.getSelectionModel().setCellSelectionEnabled(true);
 
-//        initializeTableRecords();
+        initializeTableRecords();
 
-//        setupNameColumn();
-//        setupTestColumns();
-//        setupProjectColumn();
-//        setupButtonHandlers();
-//
-//        recordsTable.getColumns().addAll(testsCol, projectCol);
-//        recordsTable.setItems(tableRecords);
+        setupNameColumn();
+        setupTestColumns();
+        setupProjectColumn();
+        setupButtonHandlers();
+
+        recordsTable.getColumns().addAll(testsCol, projectCol);
+        recordsTable.setItems(tableRecords);
     }
 
     private void initializeTableRecords() {
@@ -79,10 +80,11 @@ public class AppCtrl {
     }
 
     private void setupNameColumn() {
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("nameProp"));
         nameCol.setMinWidth(150);
         nameCol.setResizable(false);
-        nameCol.prefWidthProperty().bind(Grbk.primaryStage.widthProperty().subtract(projectCol.widthProperty()).subtract(testsCol.widthProperty()).subtract(20));
+        nameCol.getStyleClass().add("name-header");
+        nameCol.prefWidthProperty().bind(Grbk.primaryStage.widthProperty().subtract(projectCol.widthProperty()).subtract(testsCol.widthProperty()).subtract(5));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("nameProp"));
         nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
         nameCol.setOnEditCommit(
                 event -> tableRecords.get(event.getTablePosition().getRow()).setNameProp(event.getNewValue())
@@ -116,7 +118,7 @@ public class AppCtrl {
 
     private void createTestColumn(int i) {
         TableColumn<Student, Long> test = new TableColumn<>();
-        test.setPrefWidth(60);
+        test.setPrefWidth(80);
         test.setResizable(false);
 
         test.setText("Test - " + (i+1));

@@ -46,12 +46,14 @@ public class ScoreFieldTableCell extends TableCell<Student, Long> {
         super.updateItem(score, empty);
 
         if(score == null || score == -1 || empty) {
-            setStyle("-fx-border-width: 0 0 0 3; -fx-border-color: yellow");
+            getStyleClass().removeAll("score-field-cell");
+            getStyleClass().add("score-field-cell-empty");
             setText(null);
             setGraphic(null);
         }
         else{
-            setStyle("-fx-border-width: 0 0 0 0; -fx-border-color: yellow");
+            getStyleClass().removeAll("score-field-cell-empty");
+            getStyleClass().add("score-field-cell");
             if(isEditing()) {
                 if(textField != null) {
                     textField.setText(valueOf());

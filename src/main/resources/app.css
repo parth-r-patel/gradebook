@@ -5,5 +5,50 @@
     -fx-background-color: transparent;
 }
 .table-view {
+    -fx-background-color: white;
+}
+
+.table-view .cell-selection {
+    -fx-background-color: green;
+}
+
+.table-view .column-header, .table-view .filler {
     -fx-background-color: transparent;
+}
+
+.name-header .label {
+    -fx-alignment: center-left;
+    -fx-text-fill: #009688;
+}
+
+.name-header.table-cell {
+    -fx-alignment: center-left;
+    -fx-text-fill: black;
+}
+
+.column-header-background{
+    -fx-background-color: white;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: lightgray;
+}
+
+.table-cell.score-field-cell-empty {
+    -fx-background-color: whitesmoke;
+}
+
+.table-cell.score-field-cell {
+    -fx-background-color: white;
+}
+
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-min-height: 48px;
+    -fx-border-style: solid;
+    -fx-border-color: lightgray; /** This causes trouble */
+    -fx-border-width: 0 0 1 0;
+}
+.table-cell {
+    -fx-alignment: center;
+    -fx-border-width: 0px;
+    -fx-text-fill: black;
 }
